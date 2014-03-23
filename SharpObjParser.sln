@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpObjParser", "SharpObjParser\SharpObjParser.csproj", "{E15EB5CA-4323-400B-9C74-2C7DF7C028E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMesh", "MiniMesh\MiniMesh.csproj", "{B6350633-E3BE-4DEC-84BD-CB107855A521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE7762F4-5087-44A5-BBA1-A035C36C30A5}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E15EB5CA-4323-400B-9C74-2C7DF7C028E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15EB5CA-4323-400B-9C74-2C7DF7C028E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15EB5CA-4323-400B-9C74-2C7DF7C028E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15EB5CA-4323-400B-9C74-2C7DF7C028E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6350633-E3BE-4DEC-84BD-CB107855A521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6350633-E3BE-4DEC-84BD-CB107855A521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6350633-E3BE-4DEC-84BD-CB107855A521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6350633-E3BE-4DEC-84BD-CB107855A521}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
