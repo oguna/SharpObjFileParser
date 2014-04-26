@@ -65,7 +65,7 @@ namespace MiniMesh
                 model = parser.GetModel();
             }
 
-            // per mehs
+            // per mesh
             List<VertexPositionNormalTexture> vertexBufferSource = new List<VertexPositionNormalTexture>();
             int[] triangleIndex = new int[] { 0, 1, 2 };
             int[] wuadrilateralIndex = new int[] { 0, 1, 2, 0, 2, 3 };
