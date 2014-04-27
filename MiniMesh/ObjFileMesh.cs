@@ -59,16 +59,19 @@ namespace MiniMesh
                         indexToAdd = new int[0];
                     }
                     // 頂点位置から生成した法線
-                    Vector3 normal = new Plane(new Vector3(model.Vertices[(int)j.Vertices[0] - 1]), new Vector3( model.Vertices[(int)j.Vertices[1] - 1]), new Vector3( model.Vertices[(int)j.Vertices[2] - 1])).Normal;
+                    var v1 = new Vector3(model.Vertices[(int)j.Vertices[0] - 1]);
+                    var v2 = new Vector3( model.Vertices[(int)j.Vertices[1] - 1]);
+                    var v3 = new Vector3( model.Vertices[(int)j.Vertices[2] - 1]);
+                    var normal = Vector3.Cross(v1 - v2, v1 - v3);
+                    normal.Normalize();
                     foreach (var k in indexToAdd)
                     {
                         int posIndex = (int)j.Vertices[k] - 1;
-                        int normalIndex = (int)j.Normals[k] - 1;
                         int texIndex = (int)j.TextureCoords[k] - 1;
                         VertexPositionNormalTexture vert = new VertexPositionNormalTexture()
                         {
                             Position = new Vector3(model.Vertices[posIndex]),
-                            Normal = new Vector3(model.Normals[normalIndex]),
+                            Normal = j.Normals.Count > 0 ? new Vector3(model.Normals[(int)j.Normals[k] - 1]) : normal,
                             TextureCoordinate = new Vector2(model.TextureCoord[texIndex])
                         };
                         vertexBufferSource.Add(vert);

@@ -34,7 +34,7 @@ using MapFlags = SharpDX.Direct3D11.MapFlags;
 namespace MiniMesh
 {
     /// <summary>
-    /// SharpDX MiniCube Direct3D 11 Sample
+    /// SharpDX Direct3D 11 Sample
     /// </summary>
     internal static class Program
     {
