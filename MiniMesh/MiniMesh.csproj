@@ -59,10 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MiniMeshSample.cs" />
     <Compile Include="ObjFileMesh.cs" />
     <Compile Include="ObjFileSubmesh.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sample.cs" />
     <Compile Include="VertexPositionNormalTexture.cs" />
   </ItemGroup>
   <ItemGroup>
