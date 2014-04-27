@@ -137,11 +137,6 @@ namespace MiniMesh
 
         protected override void Draw(Device device)
         {
-            var view = Matrix.LookAtLH(new Vector3(0, 0, -5), new Vector3(0, 0, 0), Vector3.UnitY);
-            var proj = Matrix.PerspectiveFovLH((float)Math.PI / 4.0f, form.ClientSize.Width / (float)form.ClientSize.Height, 0.1f, 100.0f);
-            var viewProj = Matrix.Multiply(view, proj);
-            var world = Matrix.RotationX(time) * Matrix.RotationY(time * 2) * Matrix.RotationZ(time * .7f);
-
             // メッシュの描画
             DrawMesh(device.ImmediateContext, objFileMesh);
 
