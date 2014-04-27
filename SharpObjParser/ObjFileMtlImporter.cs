@@ -134,7 +134,7 @@ namespace SharpObjParser
             Model.CurrentMaterial = new Material();
             Model.CurrentMaterial.MaterialName = name;
             Model.MaterialLib.Add(name);
-            Model.MaterialMap.Add(name, Model.CurrentMaterial);
+            Model.MaterialMap[name] = Model.CurrentMaterial;
         }
 
         private void GetTexture()

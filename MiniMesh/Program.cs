@@ -58,7 +58,7 @@ namespace MiniMesh
             };
 
             // Used for debugging dispose object references
-            // Configuration.EnableObjectTracking = true;
+            //Configuration.EnableObjectTracking = true;
 
             // Disable throws on shader compilation errors
             //Configuration.ThrowOnShaderCompileError = false;
@@ -103,7 +103,7 @@ namespace MiniMesh
             };
 
             var objFileMesh = new ObjFileMesh(device);
-            objFileMesh.Load("Resources\\cup.obj");
+            objFileMesh.Load("cup.obj");
 
             // Main loop
             RenderLoop.Run(form, () =>

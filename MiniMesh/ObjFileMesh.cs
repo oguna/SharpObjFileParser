@@ -55,20 +55,17 @@ namespace MiniMesh
             this.device = device;
         }
 
-        public void Load(string filename)
+        public void Load(string fileName)
         {
             // load .obj file
             SharpObjParser.Model model;
-            using (var stream = new FileStream(filename, FileMode.Open))
-            {
-                var parser = new SharpObjParser.ObjFileParser(stream, "cup", "Resources/");
-                model = parser.GetModel();
-            }
+            var parser = new SharpObjParser.ObjFileParser(fileName, System.IO.Path.GetFileNameWithoutExtension(fileName));
+            model = parser.GetModel();
 
             // per mesh
             List<VertexPositionNormalTexture> vertexBufferSource = new List<VertexPositionNormalTexture>();
             int[] triangleIndex = new int[] { 0, 1, 2 };
-            int[] wuadrilateralIndex = new int[] { 0, 1, 2, 0, 2, 3 };
+            int[] quadrilateralIndex = new int[] { 0, 1, 2, 0, 2, 3 };
             int startIndex = 0;
             submeshes = new ObjFileSubmesh[model.Meshes.Count];
             for (int i = 0; i < model.Meshes.Count; i++ )
@@ -87,20 +84,25 @@ namespace MiniMesh
                     }
                     else if (j.Vertices.Count == 4)
                     {
-                        indexToAdd = wuadrilateralIndex;
+                        indexToAdd = quadrilateralIndex;
                         indexCount += 6;
                     }
                     else
                     {
                         indexToAdd = new int[0];
                     }
+                    // 頂点位置から生成した法線
+                    Vector3 normal = new Plane(new Vector3(model.Vertices[(int)j.Vertices[0] - 1]), new Vector3( model.Vertices[(int)j.Vertices[1] - 1]), new Vector3( model.Vertices[(int)j.Vertices[2] - 1])).Normal;
                     foreach (var k in indexToAdd)
                     {
+                        int posIndex = (int)j.Vertices[k] - 1;
+                        int normalIndex = (int)j.Normals[k] - 1;
+                        int texIndex = (int)j.TextureCoords[k] - 1;
                         VertexPositionNormalTexture vert = new VertexPositionNormalTexture()
                         {
-                            Position = new Vector3(model.Vertices[(int)j.Vertices[k] - 1]),
-                            Normal = new Vector3(model.Normals[(int)j.Normals[k] - 1]),
-                            TextureCoordinate = new Vector2(model.TextureCoord[(int)j.TextureCoords[k] - 1])
+                            Position = new Vector3(model.Vertices[posIndex]),
+                            Normal = new Vector3(model.Normals[normalIndex]),
+                            TextureCoordinate = new Vector2(model.TextureCoord[texIndex])
                         };
                         vertexBufferSource.Add(vert);
                     }
@@ -110,13 +112,14 @@ namespace MiniMesh
                 SharpObjParser.Material materialSource = model.MaterialMap[model.MaterialLib[(int)mesh.MaterialIndex]];
                 var submesh = new ObjFileSubmesh();
                 submesh.Diffuse = new Vector3(materialSource.Diffuse);
-                submesh.Ambient = new Color3(materialSource.Ambient);
+                
+                submesh.Ambient = (materialSource.Ambient == null) ? new Color3(0.5f) : new Color3(materialSource.Ambient);
                 submesh.Shineness = materialSource.Shineness;
-                submesh.Specular = new Vector3(materialSource.Specular);
+                submesh.Specular = (materialSource.Specular == null) ? new Vector3(0.5f) : new Vector3(materialSource.Specular);
                 submesh.Alpha = materialSource.Alpha;
                 if (!string.IsNullOrWhiteSpace(materialSource.Texture))
                 {
-                    var tex = Texture2D.FromFile<Texture2D>(device, "Resources/" + materialSource.Texture);
+                    var tex = Texture2D.FromFile<Texture2D>(device, materialSource.Texture);
                     submesh.Texture = tex;
                     submesh.TextureView = new ShaderResourceView(device, tex);
                 }

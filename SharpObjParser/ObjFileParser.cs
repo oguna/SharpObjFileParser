@@ -9,10 +9,10 @@ namespace SharpObjParser
 {
     public class ObjFileParser
     {
-        public ObjFileParser(Stream stream, string modelName, string dir)
+        public ObjFileParser(string fileName, string modelName)
         {
-            this.Reader = new StreamReader(stream);
-            this.FilePass = dir;
+            this.Reader = new StreamReader(new FileStream(fileName, FileMode.Open));
+            this.DirPath = Path.GetDirectoryName(fileName);
 
             // Create the model instance to store all the data
             Model = new Model();
@@ -40,7 +40,7 @@ namespace SharpObjParser
                 {
                     continue;
                 }
-                Tokens = line.Split(' ', '\t');
+                Tokens = line.Split(new []{' ', '\t'},StringSplitOptions.RemoveEmptyEntries);
                 switch(Tokens[0])
                 {
                     case "v":
@@ -225,7 +225,7 @@ namespace SharpObjParser
         {
             // Translate tuple
             string matName = Tokens[1];
-            string fileName = FilePass + "//" + matName;
+            string fileName = Path.Combine(DirPath, matName);
             // Check for existence
             if(!File.Exists(fileName))
             {
@@ -396,6 +396,6 @@ namespace SharpObjParser
         Model Model;
         private uint Line;
         private StreamReader Reader;
-        private string FilePass;
+        private string DirPath;
     }
 }
